@@ -59897,7 +59897,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5387ace68d65b7f4b96603b3e9c8028b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectiveText: Turn the Lights
+  objectiveText: Turn Off the Lights
   completeText: wow
   objectiveDisplay: {fileID: 1004414390}
   OnCompleteObjective:
