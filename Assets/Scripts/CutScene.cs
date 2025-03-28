@@ -19,8 +19,8 @@ public class CutScene : MonoBehaviour
     public Camera PlayerCamera;
     public Camera CutCamera;
 
-    public int evilMoveSpeed = 50;
-    public int monsterMoveSpeed = 50;
+    public int evilMoveSpeed = 1;
+    public int monsterMoveSpeed = 1;
     public float monsterWaitTime = 2f;
     public float cutsceneDuration = 10f;
 
@@ -52,25 +52,24 @@ public class CutScene : MonoBehaviour
 
     private IEnumerator Summon()
     {
-        Monster.SetActive(true);
 
-        for (float alpha = 6f; alpha >= 0; alpha -= 0.1f)
+        for (float alpha = 10f; alpha >= 0; alpha -= 0.1f)
             {
                 yield return new WaitForSeconds(.015f);
-                Evil.transform.position += Vector3.down * Time.deltaTime * evilMoveSpeed;
-                Monster.transform.position += Vector3.up * Time.deltaTime * monsterMoveSpeed;
+                Evil.transform.position += Vector3.down * evilMoveSpeed *Time.deltaTime;
             }
+        Monster.SetActive(true);
 
-        for (int i = 0; i < 35; i++)  // Loop 20 times to apply small random rotations
+        for (int i = 0; i < 35; i++)
         {
             Quaternion rumble = Quaternion.Euler(
-                Random.Range(36f, 38f),            // Randomize pitch (X axis)
-                Random.Range(-91f, -89f),          // Randomize yaw (Y axis)
-                Random.Range(-3f, -1f)             // Randomize roll (Z axis)
+                Random.Range(36f, 38f),            
+                Random.Range(-91f, -89f),       
+                Random.Range(-3f, -1f)         
             );
             CutCamera.transform.rotation = rumble;
 
-            yield return new WaitForSeconds(0.025f);  // Small delay between shakes
+            yield return new WaitForSeconds(0.025f);
         }
 
         StartCoroutine(End(1));
